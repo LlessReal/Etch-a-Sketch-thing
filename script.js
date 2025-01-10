@@ -1,18 +1,23 @@
 
-const body = document.querySelector("body")
+const body = document.querySelector("body") // Selects body
 body.setAttribute("style",`
     background-color: cyan; 
     min-height: 100vh;
-    min-width: 100%;
+    min-width: 1200px;
     display: flex; 
     flex-direction: column;
     margin: 0px;
     `)
+    // Idk why i set the min width like this
 
 TotalBoxContainer = document.createElement("div")
 TotalBoxContainer.setAttribute("style",`display: flex; flex-direction: column;
-    align-items: center;`)
-body.appendChild(TotalBoxContainer)
+    align-items: center;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    `) // This was supposed to sensor the shit
+body.appendChild(TotalBoxContainer) // Add to body
 
 NewSetButton = document.createElement("button")
 NewSetButton.textContent = "Create new grid"
@@ -44,7 +49,7 @@ TotalBoxContainer.appendChild(NewSetButton)
 BoxContainer = document.createElement("div")
 BoxContainer.setAttribute("style",`display: flex;
     padding: 10px;
-    width: %;
+    width: 960px;
     max-height: 20px;
     flex-wrap: wrap;`)
 TotalBoxContainer.appendChild(BoxContainer)
@@ -65,10 +70,9 @@ CreateNewGridFunc = function() {
         DefaultEvent = function() {
             item.setAttribute("style",`background-color: gray; 
             font-size: 20px; 
-            flex: 1 1 100%;
+            flex: 1 1 auto;
             border: solid 3px;
             transition: 4s;
-            max-width: 30px;
             user-select: none;
             `)   
         }
@@ -76,15 +80,25 @@ CreateNewGridFunc = function() {
         item.addEventListener("mouseover", () => {
             item.setAttribute("style",`background-color: red; 
             font-size: 20px; 
-            flex: 1 1 100%;
+            flex: 1 1 auto;
             border: solid 3px;
-            max-width: 30px;
             user-select: none;
             `)
             
         })
-        item.addEventListener("mouseout", DefaultEvent)
-        item.textContent = `${index + 1}` 
+        item.value = 10
+        item.addEventListener("mouseout", DefaultEvent) // Runs default event (background color will get replaced next tho)
+        item.addEventListener("mouseout", () => {
+            item.style.backgroundColor = `rgb(${127 + Math.random() * 127},${127 + Math.random() * 127},${127 + Math.random() * 127})`
+            // Background color becomes something new (with 127 starting value for more brightness)
+            if (item.value != 0) {
+                item.value-- 
+            } 
+            item.style.filter = `brightness(${item.value / 10})`
+            // Each time mouse moves out, brightness become 0.9 -> 0.8, etc.
+            // As for the if statement above, it was added so the brightness don't reset for becoming negative
+        })
+        item.textContent = `${index + 1}` // Numbers given for each number cuz why not
     })
 }
 
