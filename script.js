@@ -25,29 +25,26 @@ NewSetButton.setAttribute("style",`padding: 10px; margin: 20px;
     color: white; background-color: red;
     border: groove 10px white; border-radius: 20px;
     transition: 0.5s;
-    width: 500px;
+    width: 300px;
     cursor: pointer;
     `)
-
-NewSetButton.addEventListener("mouseover", () => { NewSetButton.style.boxShadow = `0 0 40px yellow inset` })
-NewSetButton.addEventListener("mouseout", () => { NewSetButton.style.boxShadow = `` })
-
-TotalBoxContainer.appendChild(NewSetButton)
-
-BoxContainer = document.createElement("div")
-BoxContainer.setAttribute("style",`display: flex;
-    padding: 10px;
-    width: 900px;
-    flex-wrap: wrap;`) // Added wrap with 900px so it can be 16 a row
-TotalBoxContainer.appendChild(BoxContainer)
-
-GridSize = 16
 NewSetButton.addEventListener("click", () => {
     GridSize = prompt("How large do you want your new grid to be (put in the size of the sides by grid #")
     BoxContainer.innerHTML = ""
     CreateNewGridFunc()
 })
+NewSetButton.addEventListener("mouseover", () => { NewSetButton.style.boxShadow = `0 0 40px yellow inset` })
+NewSetButton.addEventListener("mouseout", () => { NewSetButton.style.boxShadow = `` })
+TotalBoxContainer.appendChild(NewSetButton)
 
+BoxContainer = document.createElement("div")
+BoxContainer.setAttribute("style",`display: flex;
+    padding: 10px;
+    width: 410px;
+    flex-wrap: wrap;`) // Added wrap with 900px so it can be 16 a row
+TotalBoxContainer.appendChild(BoxContainer)
+
+GridSize = 16
 CreateNewGridFunc = function() {
     for (i = 0; i < (GridSize * GridSize); i++) {
         NewBox = document.createElement("div")
@@ -56,9 +53,9 @@ CreateNewGridFunc = function() {
     
     BoxContainer.querySelectorAll("div").forEach((item, index) => {
         item.setAttribute("style",`background-color: gray; 
-            font-size: 20px; text-align: center;
-            padding: 10px;
-            max-width: 30px; flex: 1 1 100%; 
+            font-size: 7.5px; text-align: center;
+            padding: 7.5px 0px 7.5px 0px;
+            max-width: 20px; flex: 1 1 100%; 
             border: solid 3px;
             user-select: none;
             `)  // Properties given to boxes
